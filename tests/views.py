@@ -211,6 +211,7 @@ class MockSessionStartView(APIView):
             {
                 "test_session_id": session.id,
                 "type": "full_mock",
+                "exam_title": session.exam.title if session.exam else "Mock Test",
                 "exam_pattern_id": session.exam_pattern_id,
                 "exam_id": session.exam_id,
                 "status": session.status,
@@ -414,6 +415,7 @@ class PracticeSessionStartView(APIView):
             {
                 "test_session_id": session.id,
                 "type": "practice_section",
+                "exam_title": session.exam.title if session.exam else "Practice Test",
                 "mode": serializer.validated_data.get("mode", "single_exam"),
                 "section_id": serializer.validated_data.get("section_id"),
                 "section_name": serializer.validated_data.get("section_name"),
@@ -482,6 +484,7 @@ class PracticeTopicSessionStartView(APIView):
             {
                 "test_session_id": session.id,
                 "type": "practice_topic",
+                "exam_title": session.exam.title if session.exam else "Practice Test",
                 "mode": serializer.validated_data.get("mode", "single_exam"),
                 "status": session.status,
                 "started_at": session.started_at,
@@ -539,6 +542,7 @@ class WeakPracticeSessionStartView(APIView):
             {
                 "test_session_id": session.id,
                 "type": "weak_practice",
+                "exam_title": session.exam.title if session.exam else "Weak Practice",
                 "topics_used": [topic.name for topic in weak_topics],
                 "status": session.status,
                 "started_at": session.started_at,
